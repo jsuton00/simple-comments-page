@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from './store/actions/index';
+import Comments from './components/Comments';
+import Header from './components/Header';
 
 function App() {
+  const dispatch = useDispatch();
+  const comments = useSelector((state) => state.filteredComments);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(actions.fetchComments());
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app" className="app">
+      <Header />
+      <main id="main" className="main container-fluid">
+        <div id="comments-container" className="comments-container">
+          {comments.length > 0 &&
+            comments.map((comment, index) => {
+              return <Comments key={index} comment={comment} />;
+            })}
+        </div>
+      </main>
     </div>
   );
 }
