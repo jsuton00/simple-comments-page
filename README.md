@@ -4,4 +4,4 @@ A simple comments' page built with React and Redux. The dummy comments were fetc
 
 ## Deploy
 
-simple-comments-page.vercel.app/
+https://simple-comments-page.vercel.app/
