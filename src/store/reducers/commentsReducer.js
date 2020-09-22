@@ -4,6 +4,8 @@ import { updateObject } from '../../utils/reduxUtils';
 const initialState = {
   comments: [],
   filteredComments: [],
+  approveComments: false,
+  rejectComments: false,
   loadingComments: false,
   errorFetchingComments: false,
 };
@@ -31,12 +33,28 @@ const fetchCommentsSuccess = (state, action) => {
 
 /** FETCH COMMENTS END */
 
+const approveComments = (state, action) => {
+  return updateObject(state, {
+    approveComments: true,
+  });
+};
+
+const rejectComments = (state, action) => {
+  return updateObject(state, {
+    rejectComments: true,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_COMMENTS_FAILURE:
       return fetchCommentsFailed(state, action);
     case actionTypes.FETCH_COMMENTS_SUCCESS:
       return fetchCommentsSuccess(state, action);
+    case actionTypes.APPROVE_COMMENTS:
+      return approveComments(state, action);
+    case actionTypes.REJECT_COMMENTS:
+      return rejectComments(state, action);
     case actionTypes.LOADING_COMMENTS:
       return setLoadingComments(state, action);
     default:

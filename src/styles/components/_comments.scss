@@ -76,4 +76,27 @@
     padding: $spacing-secondary $spacing-xs;
     white-space: normal;
   }
+  &-review {
+    width: 100%;
+    align-items: center;
+    padding: $spacing-secondary $spacing-xs;
+    &-results {
+      flex-basis: 3%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: $spacing-sm $spacing-base $spacing-sm $spacing-base;
+      text-align: center;
+    }
+  }
+}
+
+.approved {
+  color: $approve-button-colour;
+}
+
+.rejected {
+  color: $reject-button-colour;
 }

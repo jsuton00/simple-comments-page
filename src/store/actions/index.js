@@ -1,6 +1,8 @@
 export {
-	fetchComments,
-	fetchCommentsFailed,
-	fetchCommentsSuccess,
-	loadingComments,
-} from "./comments";
+  fetchComments,
+  fetchCommentsFailed,
+  fetchCommentsSuccess,
+  approveComments,
+  rejectComments,
+  loadingComments,
+} from './comments';

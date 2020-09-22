@@ -1,13 +1,43 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
+import { ApproveButton, RejectButton } from './ApprovalButtons';
+import { faCheck, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import React from 'react';
 
 export default function Comments(props) {
   const { comment } = props;
   console.log(comment);
 
   const { id, name, body, email } = comment;
+
+  const [approve, setApprove] = useState(false);
+  const [reject, setReject] = useState(false);
+
+  const clickApprove = () => {
+    if (reject === true) {
+      setReject(false);
+      return setApprove(true);
+    }
+    return setApprove(true);
+  };
+
+  const clickReject = () => {
+    if (approve === true) {
+      setApprove(false);
+      return setReject(true);
+    }
+    return setReject(true);
+  };
+
+  const showReviewIcon = () => {
+    if (approve) {
+      return <FontAwesomeIcon icon={faCheck} size="2x" className="approved" />;
+    }
+    if (reject) {
+      return <FontAwesomeIcon icon={faTimes} size="2x" className="rejected" />;
+    }
+    return '';
+  };
 
   return (
     <div
@@ -36,7 +66,12 @@ export default function Comments(props) {
             </a>
           </p>
           <p className="comment-text row">{body}</p>
+          <div className="comment-review row">
+            <ApproveButton clickedApprove={clickApprove} />
+            <RejectButton clickedReject={clickReject} />
+          </div>
         </div>
+        <div className="comment-review-results mr-3">{showReviewIcon()}</div>
       </div>
     </div>
   );
